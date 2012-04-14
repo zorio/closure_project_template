@@ -1,0 +1,39 @@
+License: MIT
+Author: zorio <zoriorz@gmail.com>
+
+This is a web project template that uses closure tools.
+
+
+Prerequisites:
+  - python (which works on closure tools)
+  - java (which works on closure tools)
+  - svn (need to get closure-library)
+  - scons
+
+
+Setup:
+
+  1. You need to get closure tools first.
+   - python setup.py
+
+  2. This template contains sample files that uses closure tools. To build them, run scons.
+   - scons
+
+  3. See the html file in your browser.
+   - (your browser) static/html/index_debug.html (for debug build)
+   - (your browser) static/html/index_release.html (for release build)
+
+  4. Change project name and namespace in SConstruct file for your project. 
+
+Directory Structure:
+  - static:
+    - javascript: Put your javascript files this directory or its sub directories.
+    - soy: soy(closure-template) files are here(or sub directories).
+    - stylesheet: Css files are here(or sub directories).
+    - html: This directory is only for sample files. You don't need to use this.
+
+  - _generated: Compiled javascript file is created here.
+    - javascript: Generated javascript files.
+    - stylesheet: Generated stylesheet files.
+
+For detail about closure tools, see https://developers.google.com/closure/

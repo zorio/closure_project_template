@@ -2,8 +2,8 @@
 #Envrionment settings
 #
 env = Environment()
-env['PROJECT_NAME'] = "sample"
-env['NAMESPACE'] = env['PROJECT_NAME'] + ".index"
+env['PROJECT_NAME'] = "sample" # CHANGE THIS VALUE TO YOUR PROJECT NAME
+env['NAMESPACE'] = env['PROJECT_NAME'] + ".index" # CHANGE THIS
 
 env['JAVA'] = "/usr/bin/java"
 env['CLOSURE_PROJECT_DIR'] = "closure-project/"
@@ -17,6 +17,7 @@ env['CLOSUREBUILDER'] = env['CLOSURE_LIBRARY_ROOT_DIR'] + "closure/bin/build/clo
 
 env['INPUT_STYLESHEET_DIR'] = "static/stylesheet/"
 env['INPUT_JAVASCRIPT_DIR'] = "static/javascript/"
+env['INPUT_TEMPLATE_DIR'] = "static/javascript/soy/"
 
 env['OUTPUT_STYLESHEET_DIR'] = "_generated/stylesheet/"
 env['OUTPUT_JAVASCRIPT_DIR'] = "_generated/javascript/"
@@ -33,6 +34,7 @@ def find_recursive(pattern, rootdirs):
   import fnmatch
   import os
   matches = []
+  rootdirs = rootdirs if isinstance(rootdirs, type([])) else [rootdirs]
   for rootdir in rootdirs:
     for root, dirnames, filenames in os.walk(rootdir):
       for filename in fnmatch.filter(filenames, pattern):
@@ -46,8 +48,8 @@ def build_command_string(prefix, item_format, list, suffix):
 #
 # INPUT FILES
 #
-INPUT_STYLESHEET_FILES = Glob(env['INPUT_STYLESHEET_DIR']+"*.css")
-INPUT_SOY_FILES = Glob(env['INPUT_JAVASCRIPT_DIR']+"soy/*.soy")
+INPUT_STYLESHEET_FILES = find_recursive("*.css", env['INPUT_STYLESHEET_DIR'])
+INPUT_SOY_FILES = find_recursive("*.soy", env['INPUT_TEMPLATE_DIR'])
 INPUT_JAVASCRIPT_FILES = find_recursive("*.js", [env['INPUT_JAVASCRIPT_DIR'], env['CLOSURE_LIBRARY_ROOT_DIR'], env['CLOSURE_TEMPLATE_DIR']])
 
 
@@ -65,9 +67,10 @@ env.Command([env['OUTPUT_STYLESHEET_RELEASE'], env['OUTPUT_STYLESHEET_RELEASE_MA
 
 
 # TEMPLATE
+import os
 compiledSoys = []
 for soy in INPUT_SOY_FILES:
-  c = env.Command(env['OUTPUT_JAVASCRIPT_DIR'] + soy.name + ".js", soy,
+  c = env.Command(os.path.join(env['OUTPUT_JAVASCRIPT_DIR'], os.path.basename(soy)) + ".js", soy,
     "$JAVA -jar $CLOSURE_TEMPLATE_JAR --shouldProvideRequireSoyNamespaces --cssHandlingScheme GOOG --outputPathFormat $TARGET $SOURCE")
   compiledSoys.append(c)
 
