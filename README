@@ -5,6 +5,7 @@ This is a web project template that uses closure tools.
 
 
 Prerequisites:
+
   - python (which works on closure tools)
   - java (which works on closure tools)
   - svn (need to get closure-library)
@@ -24,16 +25,31 @@ Setup:
    - (your browser) static/html/index_release.html (for release build)
 
   4. Change project name and namespace in SConstruct file for your project. 
+   - project name: Name of your project. This is used for generated file names.
+   - namespace: The name space of the root of dependencies in your project.
+
 
 Directory Structure:
+
   - static:
     - javascript: Put your javascript files this directory or its sub directories.
     - soy: soy(closure-template) files are here(or sub directories).
-    - stylesheet: Css files are here(or sub directories).
+    - stylesheet: CSS files here. These files are processed by Closure Stylesheets.
     - html: This directory is only for sample files. You don't need to use this.
 
   - _generated: Compiled javascript file is created here.
     - javascript: Generated javascript files.
     - stylesheet: Generated stylesheet files.
+
+
+About Sample files:
+
+  Sample is consists of the following 5 files.
+    - static/javascript/index.js: This file uses soy and css and creates screen.
+    - static/javascript/soy/index.soy: soy template file. Called from index.js.
+    - static/stylesheet/index.gss: CSS source code.
+    - static/html/index_debug.html: This file shows how to use the generated js & css files in debug mode.
+    - static/html/index_release.html: This file show how to use them in release mode.
+
 
 For detail about closure tools, see https://developers.google.com/closure/

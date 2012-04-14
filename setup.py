@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""This script downloads and retrieves the following closure tools
+  - closure library
+  - closure templates
+  - closure compiler
+  - closure stylesheets
+  [Usage] python setup.py
+"""
 
 import os
 import subprocess

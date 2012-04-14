@@ -48,7 +48,7 @@ def build_command_string(prefix, item_format, list, suffix):
 #
 # INPUT FILES
 #
-INPUT_STYLESHEET_FILES = find_recursive("*.css", env['INPUT_STYLESHEET_DIR'])
+INPUT_STYLESHEET_FILES = find_recursive("*.gss", env['INPUT_STYLESHEET_DIR'])
 INPUT_SOY_FILES = find_recursive("*.soy", env['INPUT_TEMPLATE_DIR'])
 INPUT_JAVASCRIPT_FILES = find_recursive("*.js", [env['INPUT_JAVASCRIPT_DIR'], env['CLOSURE_LIBRARY_ROOT_DIR'], env['CLOSURE_TEMPLATE_DIR']])
 
